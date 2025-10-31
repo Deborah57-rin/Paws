@@ -1,0 +1,307 @@
+header {
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 17px;
+  background: transparent;
+}
+header img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-left: 50px;
+  transition: transform 1s;
+}
+header img:hover {
+  transform: rotate(360deg);
+}
+
+ul {
+  margin-right: 50px;
+}
+li {
+  display: inline;
+}
+li a {
+  display: inline-block;
+  text-decoration: none;
+  width: 100px;
+  color: black;
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+a:hover {
+  background-color: black;
+  color: aliceblue;
+  border-radius: 20px;
+}
+body {
+  margin: 0;
+  font-size: 17px;
+  font-family: "Times New Roman", Times, serif;
+  width: 100%;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+#first {
+  width: 100%;
+  height: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+}
+#first img {
+  width: 550px;
+  height: 600px;
+}
+.small {
+  width: 400px;
+  height: 200px;
+  position: relative;
+  top: 50px;
+}
+#first h1 {
+  font-size: 70px;
+}
+#first p {
+  color: black;
+  font-size: 20px;
+}
+button {
+  margin-top: 40px;
+  width: 120px;
+  padding: 5px;
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: white;
+  border: 3px double black;
+  transition: width 2s;
+  box-shadow: 10px 10px 20px black;
+}
+
+button:hover {
+  background-color: black;
+  border: 3px double white;
+  color: white;
+  width: 160px;
+}
+#second {
+  background-color: black;
+  width: 100%;
+  height: 600px;
+  padding: 15px;
+}
+.inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+#second h3 {
+  color: aliceblue;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+p {
+  color: aliceblue;
+  padding-left: 20px;
+}
+#second img {
+  width: 600px;
+  height: 480px;
+  margin: 10px;
+}
+#third {
+  background-color: white;
+  width: 100%;
+  height: 600px;
+  box-sizing: border-box;
+  padding: 5px 25px 10px 25px;
+  margin: 5px 10px 5px 10px;
+}
+#how {
+  display: flex;
+  justify-content: space-evenly;
+}
+.w {
+  width: 200px;
+  height: 250px;
+  margin: 10px;
+  padding: 5px;
+  transition: transform 1s ease-in;
+}
+.w:hover {
+  transform: scale(1.5, 1.5);
+}
+#third h3 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+#third img {
+  width: 200px;
+  height: 200px;
+}
+#third p {
+  color: black;
+}
+#fourth {
+  background-color: black;
+  width: 100%;
+  height: 570px;
+  padding: 15px;
+  color: white;
+  font-size: 20px;
+}
+#fourth h3 {
+  color: aliceblue;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+.in {
+  display: flex;
+  justify-content: space-between;
+}
+.in img {
+  width: 505px;
+  height: 440px;
+  position: relative;
+  bottom: 0px;
+}
+#fm {
+  width: 550px;
+  height: 400px;
+  
+}
+form {
+  position: relative;
+  top: 70px;
+  
+}
+input {
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  display: block;
+}
+input[type="submit"] {
+  width: 100px;
+  padding: 5px;
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px double white;
+  transition: width 2s;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 15px;
+  vertical-align: middle;
+}
+input[type="submit"]:hover {
+  width: 130px;
+  box-shadow: 7px 10px 10px purple;
+}
+form a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+form a:hover {
+  color: purple;
+}
+#fifth {
+  width: 100%;
+  height: 900px;
+  box-sizing: border-box;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+#fifth h3 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+#one {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#one img {
+  width: 230px;
+  height: 200px;
+  position: relative;
+}
+#one p {
+  color: black;
+}
+#two {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#two img {
+  width: 230px;
+  height: 200px;
+  position: relative;
+}
+#two p {
+  color: black;
+}
+#three {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#three img {
+  width: 230px;
+  height: 200px;
+  position: relative;
+}
+#three p {
+  color: black;
+}
+footer{
+    background-color: black;
+    width: 100%;
+    height: 200px;
+    padding:10px;
+}
+footer img{
+    width: 50px;
+    height: 50px;
+    padding-left: 50%;
+    margin-top: 10px;
+
+}
+footer h3{
+    color: white;
+    text-align: center;
+    font-size: 25px;
+}
+#last{
+    display: flex;
+    justify-content:center;
+    gap:25px;
+    margin-top: 15px;
+
+}
+#last img{
+    width: 50px;
+    height: 50px;
+}
