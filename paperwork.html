@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Paperwork - PAWS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/custom.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-black text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">PAWS</h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-gray-300 transition-colors">Home</a></li>
+                <li><a href="browse.html" class="hover:text-gray-300 transition-colors">Browse Dogs</a></li>
+                <li><a href="paperwork.html" class="text-green-500 font-medium">Adoption</a></li>
+                <li><a href="#" class="hover:text-gray-300 transition-colors">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container mx-auto py-8 px-4 max-w-6xl">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">Adoption Paperwork</h1>
+            <p class="text-gray-600 text-lg">Complete the adoption process for your new family member</p>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="mb-12">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                    <div class="h-1 w-20 bg-blue-600"></div>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                    <div class="h-1 w-20 bg-blue-600"></div>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                </div>
+            </div>
+            <div class="flex justify-between mt-2 max-w-md mx-auto text-sm text-gray-600">
+                <span class="ml-2">Browse</span>
+                <span>Schedule Meeting</span>
+                <span class="mr-4">Adoption</span>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Dog Info Column -->
+            <div class="lg:col-span-1">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-6">
+                    <h2 class="text-xl font-bold mb-4 text-gray-800">Dog Information</h2>
+                    <div id="adoption-dog-info" class="space-y-4">
+                        <!-- Dog info will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adoption Form Column -->
+            <div class="lg:col-span-2">
+                <div class="bg-green-50 p-8 rounded-xl shadow-md border border-green-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Adoption Application</h2>
+                            <p class="text-gray-600">Tell us about yourself and your home</p>
+                        </div>
+                    </div>
+
+                    <form id="adoption-form" class="space-y-8">
+                        <!-- Personal Information Section -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Personal Information
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                                    <input type="text" id="full-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                                    <input type="date" id="dob" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Address</label>
+                                    <input type="text" id="address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">City</label>
+                                    <input type="text" id="city" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">State</label>
+                                    <input type="text" id="state" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">ZIP Code</label>
+                                    <input type="text" id="zip" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Home Environment Section -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                </svg>
+                                Home Environment
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Housing Type</label>
+                                    <select id="housing" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                        <option value="">Select housing type</option>
+                                        <option value="house">House</option>
+                                        <option value="apartment">Apartment</option>
+                                        <option value="condo">Condo</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Do you own or rent?</label>
+                                    <select id="own-rent" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                        <option value="">Select</option>
+                                        <option value="own">Own</option>
+                                        <option value="rent">Rent</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Do you have a yard?</label>
+                                    <select id="yard" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                        <option value="">Select</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Yard is fenced?</label>
+                                    <select id="fenced" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
+                                        <option value="">Select</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                        <option value="partial">Partially</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Family & Pets Section -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Family & Pets
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Number of adults in household</label>
+                                    <input type="number" id="adults" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" min="1" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Number of children in household</label>
+                                    <input type="number" id="children" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" min="0" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Other pets in household</label>
+                                    <select id="other-pets" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                        <option value="">Select</option>
+                                        <option value="none">None</option>
+                                        <option value="dogs">Other dogs</option>
+                                        <option value="cats">Cats</option>
+                                        <option value="both">Both dogs and cats</option>
+                                        <option value="other">Other pets</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Are all pets spayed/neutered?</label>
+                                    <select id="pets-fixed" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
+                                        <option value="">Select</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                        <option value="na">Not applicable</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Previous Experience Section -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Previous Experience
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Have you owned a dog before?</label>
+                                    <select id="previous-dog" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" required>
+                                        <option value="">Select</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">What happened to previous dog?</label>
+                                    <input type="text" id="previous-dog-fate" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Agreements Section -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                                Agreements
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="agree-care" class="mt-1 mr-3 h-5 w-5 text-green-500 rounded focus:ring-green-400" required>
+                                    <label for="agree-care" class="text-gray-700">I agree to provide proper care, nutrition, and veterinary treatment for this dog</label>
+                                </div>
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="agree-return" class="mt-1 mr-3 h-5 w-5 text-green-500 rounded focus:ring-green-400" required>
+                                    <label for="agree-return" class="text-gray-700">I agree to return the dog to PAWS if I can no longer care for it</label>
+                                </div>
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="agree-homecheck" class="mt-1 mr-3 h-5 w-5 text-green-500 rounded focus:ring-green-400" required>
+                                    <label for="agree-homecheck" class="text-gray-700">I agree to a potential home visit by a PAWS representative</label>
+                                </div>
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="agree-terms" class="mt-1 mr-3 h-5 w-5 text-green-500 rounded focus:ring-green-400" required>
+                                    <label for="agree-terms" class="text-gray-700">I have read and agree to all adoption terms and conditions</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-4">
+                            <button type="submit" class="bg-green-500 text-white px-8 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium shadow-sm flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Submit Adoption Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 PAWS Dog Adoption. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/paperwork.js"></script>
+</body>
+</html>

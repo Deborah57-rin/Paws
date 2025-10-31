@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Meeting - PAWS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/custom.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-black text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">PAWS</h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-gray-300 transition-colors">Home</a></li>
+                <li><a href="browse.html" class="hover:text-gray-300 transition-colors">Browse Dogs</a></li>
+                <li><a href="meeting.html" class="text-yellow-400 font-medium">Schedule Meeting</a></li>
+                <li><a href="#" class="hover:text-gray-300 transition-colors">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container mx-auto py-8 px-4 max-w-6xl">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">Schedule a Meeting</h1>
+            <p class="text-gray-600 text-lg">Set up a time to meet your selected dogs and see if it's a perfect match</p>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="mb-12">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                    <div class="h-1 w-20 bg-blue-600"></div>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                    <div class="h-1 w-20 bg-gray-300"></div>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                </div>
+            </div>
+            <div class="flex justify-between mt-2 max-w-md mx-auto text-sm text-gray-600">
+                <span class="ml-2">Browse</span>
+                <span>Schedule Meeting</span>
+                <span class="mr-4">Adoption</span>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Selected Dogs Column -->
+            <div class="lg:col-span-1">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-6">
+                    <h2 class="text-xl font-bold mb-4 text-gray-800">Selected Dogs</h2>
+                    <div id="selected-dogs-list" class="space-y-4">
+                        <!-- Selected dogs will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meeting Form Column -->
+            <div class="lg:col-span-2">
+                <div class="bg-yellow-50 p-8 rounded-xl shadow-md border border-yellow-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Meeting Details</h2>
+                            <p class="text-gray-600">Let's schedule your visit to meet the dogs</p>
+                        </div>
+                    </div>
+
+                    <form id="meeting-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Your Name</label>
+                                <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Preferred Date</label>
+                                <input type="date" id="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Preferred Time</label>
+                                <select id="time" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                    <option value="">Select a time</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="15:00">3:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Meeting Location</label>
+                                <select id="location" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                    <option value="">Select a location</option>
+                                    <option value="Westlands">Westlands Shelter</option>
+                                    <option value="Karen">Karen Shelter</option>
+                                    <option value="Kilimani">Kilimani Shelter</option>
+                                    <option value="Lavington">Lavington Shelter</option>
+                                    <option value="Runda">Runda Shelter</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700">Additional Notes (Optional)</label>
+                            <textarea id="notes" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" rows="4" placeholder="Any special requests or questions..."></textarea>
+                        </div>
+                        <div class="flex justify-end pt-4">
+                            <button type="submit" class="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg hover:bg-yellow-600 transition-colors font-medium shadow-sm flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Schedule Meeting
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 PAWS Dog Adoption. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/meeting.js"></script>
+</body>
+</html>
