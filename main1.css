@@ -122,6 +122,17 @@ p {
   height: 480px;
   margin: 10px;
 }
+.about-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-left: 50px;
+  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  height: 350px;
+}
+
 #third {
   background-color: white;
   width: 100%;
@@ -227,54 +238,90 @@ form a:hover {
 }
 #fifth {
   width: 100%;
-  height: 900px;
+  height: auto;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 30px 5px;
   margin-bottom: 30px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
 }
+
 #fifth h3 {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
+  margin-bottom: 30px;
+  color: white;
 }
-#one {
+
+#one, #two, #three {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 25px;
+  margin-bottom: 25px;
 }
-#one img {
-  width: 230px;
-  height: 200px;
+
+.fun, .ha, .haha {
   position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  background-color: white;
+  width: 300px;
+  height: 280px;
 }
-#one p {
+
+.fun img, .ha img, .haha img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.fun:hover, .ha:hover, .haha:hover {
+  transform: translateY(-5px);
+}
+
+.fun:hover img, .ha:hover img, .haha:hover img {
+  transform: scale(1.05);
+}
+
+.all {
   color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 8px 0;
+  padding: 0;
+  background-color: white;
 }
-#two {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-#two img {
-  width: 230px;
-  height: 200px;
-  position: relative;
-}
-#two p {
+
+.see-more-btn {
+  display: block;
+  margin: 30px auto 0;
+  width: 150px;
+  padding: 12px;
+  background-color: white;
   color: black;
+  border: 2px solid black;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-#three {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+
+.see-more-btn:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
 }
-#three img {
-  width: 230px;
-  height: 200px;
-  position: relative;
-}
-#three p {
-  color: black;
+
+.see-more-btn:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
 }
 footer{
     background-color: black;
