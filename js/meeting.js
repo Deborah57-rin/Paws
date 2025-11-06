@@ -46,14 +46,10 @@ function displaySelectedDogs() {
     }
     
     container.innerHTML = selectedDogData.map(dog => `
-        <div class="dog-card border-2 border-yellow-300 bg-white rounded-xl overflow-hidden">
+        <div class="dog-card border-2 border-green-300 bg-white rounded-xl overflow-hidden">
             <div class="relative">
-                <img src="${dog.image}" alt="${dog.name}" class="w-full h-32 object-cover">
-                <div class="absolute top-2 right-2">
-                    <span class="status-badge bg-yellow-100 text-yellow-800">
-                        Meeting Scheduled
-                    </span>
-                </div>
+                <img src="${dog.image}" alt="${dog.name}" class="w-full md:w-50 h-48 object-cover r">
+                
             </div>
             <div class="p-4">
                 <h3 class="font-bold text-lg text-gray-900 mb-1">${dog.name}</h3>
