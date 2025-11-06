@@ -1,70 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="main1.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up - PAWS</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="main1.css" />
 </head>
 <body>
-     <div id="fourth">
+  <div id="fourth">
+    <div class="auth-forms">
+      <div class="form-section signup-form">
         <h3>SIGN UP</h3>
-        <div class="in">
-          <img src="blaki.jpg" alt="" />
-          <div id="fm">
-            <form>
-              <label for="first-name"
-                >NAME<br />
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Jane Doe" /></label
-              ><br />
-              <label for="mail"
-                >EMAIL<br />
-                <input
-                  type="email"
-                  name="mail"
-                  id=""
-                  placeholder="janedoe@gmail.com"
-                  required /></label
-              ><br />
-              <label for="pass"
-                >PASSWORD<br />
-                <input
-                  type="password"
-                  name="pass"
-                  placeholder="minimum of 8 characters"
-                  required
-                  minlength="8" /></label
-              ><br />
-              <label for="terms" class="container">
-                <input type="checkbox" id="term" required /><a href=""
-                  >Terms and conditions</a
-                > </label
-              ><br />
-              <br /><input type="submit" value="Submit" />
+        <div class="auth-container">
+          <div class="auth-image-wrapper">
+            <img src="blaki.jpg" alt="Dog adoption" />
+          </div>
+          <div class="auth-form-wrapper">
+            <form id="signup-form" class="auth-form">
+              <div class="form-group">
+                <label for="first-name">NAME</label>
+                <input type="text" id="first-name" name="name" placeholder="Jane Doe" required />
+              </div>
+              <div class="form-group">
+                <label for="mail">EMAIL</label>
+                <input type="email" id="mail" name="mail" placeholder="janedoe@gmail.com" required />
+              </div>
+              <div class="form-group">
+                <label for="pass">PASSWORD</label>
+                <input type="password" id="pass" name="pass" placeholder="minimum of 8 characters" required minlength="8" />
+              </div>
+              <div class="form-group checkbox-group">
+                <label for="term" class="checkbox-label">
+                  <input type="checkbox" id="term" name="terms" required />
+                  <span>I agree to the <a href="#">Terms and conditions</a></span>
+                </label>
+              </div>
+              <button type="submit" class="submit-btn">Create Account</button>
+              <div class="auth-links">
+                <p>Already have an account? <a href="#" class="toggle-form" data-show="login">Login</a></p>
+              </div>
             </form>
           </div>
         </div>
+      </div>
+
+      <div class="form-section login-form hidden">
+        <h3>LOGIN</h3>
+        <div class="auth-container">
+          <div class="auth-image-wrapper">
+            <img src="blaki.jpg" alt="Dog adoption" />
+          </div>
+          <div class="auth-form-wrapper">
+            <form id="login-form" class="auth-form">
+              <div class="form-group">
+                <label for="login-email">EMAIL</label>
+                <input type="email" id="login-email" name="login-email" placeholder="janedoe@gmail.com" required />
+              </div>
+              <div class="form-group">
+                <label for="login-pass">PASSWORD</label>
+                <input type="password" id="login-pass" name="login-pass" placeholder="Enter your password" required minlength="8" />
+              </div>
+              <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+              </div>
+              <button type="submit" class="submit-btn">Sign In</button>
+              <div class="auth-links">
+                <p>Don't have an account? <a href="#" class="toggle-form" data-show="signup">Sign up</a></p>
+              </div>
+            </form>
+          </div>
         </div>
-      
+      </div>
+    </div>
+  </div>
+  <script src="js/auth.js"></script>
 </body>
- <footer>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/White_paw_print.png" alt="">
-    <h3> FOR MORE INFORMATION FOLLOW US ON:</h3>
-    
-   <div id="last">
-    <div class="fle">
-    <img src="https://cdn.freebiesupply.com/images/large/2x/instagram-icon-white-on-black-circle.png" alt="">
-    </div>
-    <div class="fle">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYIf4qwAVMeAZHL7QYa9s4aOEEiPVYha2HTQ&usqp=CAU" alt="">
-    </div>
-    <div class="fle">    
-    <img src="https://static.vecteezy.com/system/resources/thumbnails/023/986/746/small/whatsapp-logo-whatsapp-logo-transparent-whatsapp-icon-transparent-free-free-png.png" alt="">
-    </div>
-   </div>
-  </footer>
 </html>
