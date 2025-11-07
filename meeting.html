@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,47 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule Meeting - PAWS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles/custom.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .progress-step {
+            transition: all 0.3s ease;
+        }
+        
+        .dog-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .dog-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .sticky-sidebar {
+                position: relative !important;
+                top: 0 !important;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="bg-gray-50 text-gray-900">
     <!-- Navigation -->
-    <nav class="bg-black text-white p-4 shadow-lg">
+    <nav class="bg-black text-white p-4 shadow-lg sticky top-0 z-10">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tight">PAWS</h1>
+            <h1 class="text-2xl font-bold tracking-tight flex items-center">
+                <i class='bx bx-paw text-green-400 mr-2'></i>PAWS
+            </h1>
             <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-gray-300 transition-colors">Home</a></li>
-                <li><a href="browse.html" class="hover:text-gray-300 transition-colors">Browse Dogs</a></li>
-                <li><a href="meeting.html" class="text-yellow-400 font-medium">Schedule Meeting</a></li>
-                <li><a href="#" class="hover:text-gray-300 transition-colors">Contact</a></li>
+                <li><a href="index.html" class="hover:text-gray-300 transition-colors flex items-center">
+                    Home
+                </a></li>
+                <li><a href="browse.html" class="hover:text-gray-300 transition-colors flex items-center">
+                   Browse Dogs
+                </a></li>
+                <li><a href="meeting.html" class="text-green-400 font-medium flex items-center">
+                     Schedule Meeting
+                </a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Page Header -->
     <div class="container mx-auto py-8 px-4 max-w-6xl">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold mb-2">Schedule a Meeting</h1>
-            <p class="text-gray-600 text-lg">Set up a time to meet your selected dogs and see if it's a perfect match</p>
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-3">Schedule a Meeting</h1>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Set up a time to meet your selected dogs and see if it's a perfect match</p>
         </div>
         
         <!-- Progress Bar -->
         <div class="mb-12">
             <div class="flex items-center justify-center">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                    <div class="h-1 w-20 bg-blue-600"></div>
+                    <div class="w-12 h-12 bg-green-300 rounded-full flex items-center justify-center text-white font-bold progress-step">
+                        <i class='bx bx-check text-xl'></i>
+                    </div>
+                    <div class="h-1 w-24 bg-black"></div>
                 </div>
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <div class="h-1 w-20 bg-gray-300"></div>
+                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold progress-step">
+                        2
+                    </div>
+                    <div class="h-1 w-24 bg-gray-300"></div>
                 </div>
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold progress-step">
+                        3
+                    </div>
                 </div>
             </div>
             <div class="flex justify-between mt-2 max-w-md mx-auto text-sm text-gray-600">
-                <span class="ml-2">Browse</span>
-                <span>Schedule Meeting</span>
+                <span class="ml-4">Browse</span>
+                <span class="mr-2">Schedule Meeting</span>
                 <span class="mr-4">Adoption</span>
             </div>
         </div>
@@ -54,9 +108,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Selected Dogs Column -->
             <div class="lg:col-span-1">
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-6">
-                    <h2 class="text-xl font-bold mb-4 text-gray-800">Selected Dogs</h2>
-                    <div id="selected-dogs-list" class="space-y-4">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky-sidebar sticky top-24">
+                    <div class="flex items-center mb-4">
+                        <i class='bx bx-heart text-green-500 text-xl mr-2'></i>
+                        <h2 class="text-xl font-bold text-gray-800">Selected Dogs</h2>
+                    </div>
+                    <div id="selected-dogs-list" class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
                         <!-- Selected dogs will be displayed here -->
                     </div>
                 </div>
@@ -64,12 +121,10 @@
 
             <!-- Meeting Form Column -->
             <div class="lg:col-span-2">
-                <div class="bg-yellow-50 p-8 rounded-xl shadow-md border border-yellow-200">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white mr-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200">
+                    <div class="flex items-center mb-8">
+                        <div class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white mr-4 shadow-md">
+                            <i class='bx bx-calendar text-2xl'></i>
                         </div>
                         <div>
                             <h2 class="text-2xl font-bold text-gray-800">Meeting Details</h2>
@@ -77,27 +132,37 @@
                         </div>
                     </div>
 
-                    <form id="meeting-form" class="space-y-6">
+                    <form id="meeting-form" class="space-y-8">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Your Name</label>
-                                <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                    <i class='bx bx-user mr-1 text-gray-500'></i> Your Name
+                                </label>
+                                <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" required>
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                    <i class='bx bx-envelope mr-1 text-gray-500'></i> Email
+                                </label>
+                                <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" required>
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-                                <input type="tel" id="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                    <i class='bx bx-phone mr-1 text-gray-500'></i> Phone Number
+                                </label>
+                                <input type="tel" id="phone" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" required>
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Preferred Date</label>
-                                <input type="date" id="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                    <i class='bx bx-calendar-event mr-1 text-gray-500'></i> Preferred Date
+                                </label>
+                                <input type="date" id="date" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" required>
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Preferred Time</label>
-                                <select id="time" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                    <i class='bx bx-time mr-1 text-gray-500'></i> Preferred Time
+                                </label>
+                                <select id="time" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" required>
                                     <option value="">Select a time</option>
                                     <option value="09:00">9:00 AM</option>
                                     <option value="10:00">10:00 AM</option>
@@ -108,8 +173,10 @@
                                 </select>
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Meeting Location</label>
-                                <select id="location" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                                <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                    <i class='bx bx-map mr-1 text-gray-500'></i> Meeting Location
+                                </label>
+                                <select id="location" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" required>
                                     <option value="">Select a location</option>
                                     <option value="Westlands">Westlands Shelter</option>
                                     <option value="Karen">Karen Shelter</option>
@@ -120,14 +187,14 @@
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label class="block text-sm font-medium text-gray-700">Additional Notes (Optional)</label>
-                            <textarea id="notes" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition" rows="4" placeholder="Any special requests or questions..."></textarea>
+                            <label class="block text-sm font-medium text-gray-700 flex items-center">
+                                <i class='bx bx-edit mr-1 text-gray-500'></i> Additional Notes (Optional)
+                            </label>
+                            <textarea id="notes" class="w-full p-3 border border-gray-300 rounded-lg form-input transition" rows="4" placeholder="Any special requests or questions..."></textarea>
                         </div>
                         <div class="flex justify-end pt-4">
-                            <button type="submit" class="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg hover:bg-yellow-600 transition-colors font-medium shadow-sm flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
+                            <button type="submit" class="bg-green-500 text-gray-900 px-8 py-3 rounded-lg btn-primary font-medium shadow-sm flex items-center">
+                                <i class='bx bx-calendar-check mr-2'></i>
                                 Schedule Meeting
                             </button>
                         </div>
@@ -140,7 +207,7 @@
     <!-- Footer -->
     <footer class="bg-black text-white py-8 mt-12">
         <div class="container mx-auto text-center">
-            <p>&copy; 2023 PAWS Dog Adoption. All rights reserved.</p>
+            <p>&copy; 2025 PAWS Dog Adoption. All rights reserved.</p>
         </div>
     </footer>
 

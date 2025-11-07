@@ -43,11 +43,11 @@ function displayAdoptionDog() {
     const container = document.getElementById('adoption-dog-info');
     
     container.innerHTML = `
-        <div class="flex flex-col md:flex-row items-center">
+        <div class="flex flex-col items-center">
             <img src="${adoptionDog.image}" alt="${adoptionDog.name}" class="w-full md:w-48 h-48 object-cover rounded-lg">
-            <div class="md:ml-6 mt-4 md:mt-0">
-                <h3 class="text-2xl font-bold">${adoptionDog.name}</h3>
-                <p class="text-lg text-gray-700">${adoptionDog.breed} • ${adoptionDog.age} • ${adoptionDog.size}</p>
+            <div class="md:ml-6 mt-4 md:mt-0 p-5">
+                <h3 class="text-xl font-bold">${adoptionDog.name}</h3>
+                <p class="text-md text-gray-700">${adoptionDog.breed} • ${adoptionDog.age} • ${adoptionDog.size}</p>
                 <p class="text-gray-600 mt-2">${adoptionDog.location}</p>
                 <p class="mt-3">${adoptionDog.description}</p>
             </div>
