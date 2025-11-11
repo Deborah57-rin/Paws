@@ -155,7 +155,7 @@ p {
   padding: 15px;
   border-radius: 10px;
   margin-left: 50px;
-  width: 80%;
+  width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   height: 350px;
@@ -236,125 +236,122 @@ p {
   position: relative;
   z-index: 1;
 }
-#fifth {
+
+/*Success stories*/
+#success-stories {
+  background-color: black;
   width: 100%;
-  max-width: 100%;
   height: auto;
+  padding: 50px 20px;
   box-sizing: border-box;
-  padding: 60px 40px;
-  margin-bottom: 30px;
-  background-color: #1a1a1a;
-  border-radius: 10px;
-  overflow-x: hidden;
-  position: relative;
-  z-index: 1;
 }
 
-#fifth h3 {
+#success-stories h3 {
   text-align: center;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 40px;
   color: white;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  position: relative;
-  padding-bottom: 20px;
 }
 
-#fifth h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: white;
-}
-
-#one, #two, #three {
+.stories-container {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.fun, .ha, .haha {
-  position: relative;
+.story-card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #ffffff;
-  width: 320px;
-  height: 380px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 350px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #333;
 }
 
-.fun img, .ha img, .haha img {
+.story-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+}
+
+.story-image {
   width: 100%;
-  height: 280px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s ease;
+}
+
+.story-card:hover .story-image img {
+  transform: scale(1.05);
+}
+
+.story-content {
+  padding: 25px;
+}
+
+.story-content h4 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.story-content p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-style: italic;
+  padding-left: 0;
+}
+
+.story-date {
+  color: #888;
+  font-size: 14px;
+  font-weight: bold;
   display: block;
+  text-align: right;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
 }
 
-.fun:hover, .ha:hover, .haha:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-.fun:hover img, .ha:hover img, .haha:hover img {
-  transform: scale(1.1);
-}
-
-.all {
-  color: white;
-  text-align: center;
-  font-weight: 600;
-  font-size: 18px;
-  margin: 0;
-  padding: 20px 0;
-  background-color: #1a1a1a;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  position: relative;
-}
-
-.see-more-btn {
+#success-stories .see-more-btn {
   display: block;
-  margin: 50px auto 0;
+  margin: 30px auto 0;
   width: 180px;
-  padding: 16px 32px;
+  padding: 12px;
   background-color: white;
   color: black;
-  border: 3px double black;
-  border-radius: 30px;
+  border: 2px solid white;
+  border-radius: 25px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   cursor: pointer;
-  transition: width 2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  box-shadow: 10px 10px 20px black;
-  box-sizing: border-box;
-  height: auto;
+  transition: all 0.3s ease;
+  font-family: "Times New Roman", Times, serif;
 }
 
-.see-more-btn:hover {
+#success-stories .see-more-btn:hover {
   background-color: black;
   color: white;
-  border: 3px double white;
-  width: 220px;
-  box-shadow: 10px 10px 20px black;
+  border-color: white;
+  transform: scale(1.05);
 }
 
-.see-more-btn:active {
-  width: 220px;
-}
+/* Footer */
 footer {
     background-color: white;
     width: 100%;
