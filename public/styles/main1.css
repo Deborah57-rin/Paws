@@ -39,11 +39,7 @@ li a {
   font-weight: bold;
 }
 
-a:hover {
-  background-color: black;
-  color: aliceblue;
-  border-radius: 20px;
-}
+
 html {
   overflow-x: hidden;
   width: 100%;
@@ -115,7 +111,7 @@ button {
   box-shadow: 10px 10px 20px black;
 }
 
-button:hover {
+button:not(.submit-btn):hover {
   background-color: black;
   border: 3px double white;
   color: white;
@@ -198,7 +194,7 @@ p {
   color: black;
 }
 #fourth {
-  background: #000000;
+  background: #f8f7f7;
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
@@ -226,7 +222,7 @@ p {
   pointer-events: none;
 }
 #fourth h3 {
-  color: white;
+  color: rgb(5, 5, 5);
   text-align: center;
   font-size: 42px;
   font-weight: 700;
@@ -388,7 +384,7 @@ footer h3 {
     height: 42px;
 }
 
-/* Auth form styles - Professional Design */
+/* signup form styles - Professional Design */
 .auth-forms {
   position: relative;
   width: 100%;
@@ -584,7 +580,7 @@ footer h3 {
 /* Submit Button */
 .submit-btn {
   width: 100%;
-  padding: 16px 24px;
+  padding: 5px;
   background: white;
   color: black;
   border: 3px double black;
