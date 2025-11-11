@@ -39,14 +39,58 @@ function toggleForms(showForm) {
         }, 300);
     }
 }
+const signup_name= document.getElementById("name")
+const signup_email= document.getElementById("mail")
+const signup_password= document.getElementById("pass")
+const signup_form=document.getElementById('signup-form')
 
-// Prevent form submission for demo (remove in production)
-document.getElementById('signup-form')?.addEventListener('submit', function(e) {
+
+signup_form.addEventListener('submit', async(e) => {
     e.preventDefault();
-    // Add your form submission logic here
+    const names= signup_name.value.trim();
+    const email= signup_email.value.trim();
+    const password= signup_password.value.trim();
+
+    const res = await fetch('/api/user/signup', {
+        method:'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:JSON.stringify({names,email,password})
+
+    })
+    const data= await res.json();
+    if (data.success) {
+    toggleForms('login') 
+    } 
+    else {
+    alert("Invalid login");
+    }
+
 });
 
-document.getElementById('login-form')?.addEventListener('submit', function(e) {
+const login_form=document.getElementById('login-form')
+const login_email=document.getElementById('login-email')
+const login_pass=document.getElementById('login-pass')
+
+login_form.addEventListener('submit', async(e) => {
     e.preventDefault();
-    // Add your form submission logic here
+
+    const mail=login_email.value.trim()
+    const pass= login_pass.value.trim()
+
+    const res= await fetch('/api/user/login', {
+        method: 'POST',
+        headers:{ 'Content-Type': 'application/json' },
+        body:JSON.stringify({mail,pass})  
+
+    })
+
+    const data= await res.json();
+    if (data.success) {
+        localStorage.setItem("token", data.token )
+        window.location.href = "index.html";  
+    } 
+    else {
+    alert(data.message);
+    }
 });
+

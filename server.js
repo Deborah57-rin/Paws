@@ -17,9 +17,11 @@ mongoose.connect(process.env.MONGO_URL)
     process.exit(1);
   });
 
+//import routes
+const userRoutes= require('./routes/userRoutes')
+app.use('/api/user', userRoutes);
 
 
-  
 
 const PORT= process.env.PORT || 3000
 app.listen(PORT, () => console.log("✅ Server running on http://localhost:3000"));
