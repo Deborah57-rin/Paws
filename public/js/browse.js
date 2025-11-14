@@ -1,6 +1,6 @@
 // JavaScript for browse dogs page
 
-const API_URL = 'data/dogs.json';
+const API_URL = '../data/dogs.json';
 let allDogs = [];
 let selectedDogs = [];
 let filteredDogs = [];
