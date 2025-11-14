@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>PAWS • User Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a2b5c;    /* Deep navy — trust, calm */
+            --primary-dark: #0d1b3a;
+            --primary-light: #2c3e50;
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --gray-100: #f5f7fa;
+            --gray-200: #e6e9ef;
+            --gray-500: #6c757d;
+            --gray-700: #495057;
+            --gray-900: #212529;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 16px 40px rgba(0,0,0,0.12);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 16px 0;
+        }
+
+        header li {
+            margin: 0 12px;
+        }
+
+        header a {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        header a:hover,
+        header .active a {
+            color: var(--primary);
+            background-color: rgba(26, 43, 92, 0.06);
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+
+        /* ✅ MAIN CARD — ELEVATED + CLEAN */
+        .profile-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ✅ HERO HEADER — CENTERED, ELEGANT */
+        .profile-hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        .profile-avatar-container {
+            margin: 0 auto 24px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .profile-name {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-meta {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-meta span {
+            margin: 0 12px;
+            position: relative;
+        }
+
+        .profile-meta span:not(:last-child)::after {
+            content: "•";
+            position: absolute;
+            right: -8px;
+            opacity: 0.6;
+        }
+
+        /* ✅ CONTENT GRID — 2-COLUMN LAYOUT */
+        .profile-body {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            padding: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-body {
+                grid-template-columns: 1fr;
+                padding: 32px 24px;
+            }
+        }
+
+        /* ✅ SECTIONS */
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 16px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 15px;
+        }
+
+        .info-value {
+            font-weight: 500;
+            color: var(--gray-900);
+            font-size: 15px;
+        }
+
+        /* ✅ DOG CARDS — MODERN & EMOTIONAL */
+        .dogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .dog-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+
+        .dog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .dog-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            object-position: center 40%; /* prioritize eyes/face */
+            display: block;
+        }
+
+        .dog-content {
+            padding: 16px;
+        }
+
+        .dog-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0 0 6px;
+        }
+
+        .dog-adopted {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* ✅ SIDEBAR — CALM & FUNCTIONAL */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .stats-card,
+        .actions-card {
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            padding: 24px;
+        }
+
+        .stats-title,
+        .actions-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .stat-label {
+            color: var(--gray-500);
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+        }
+
+        .btn--primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn--primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 43, 92, 0.3);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn--outline:hover {
+            background: rgba(26, 43, 92, 0.05);
+        }
+
+        /* ✅ FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--gray-900);
+            color: var(--gray-200);
+            margin-top: 60px;
+        }
+
+        footer h3 {
+            font-weight: 600;
+            font-size: 18px;
+            margin: 16px 0;
+            color: var(--white);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            padding: 8px;
+            transition: var(--transition);
+        }
+
+        .social-icons img:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 600px) {
+            .profile-hero {
+                padding: 40px 16px;
+            }
+
+            .profile-name {
+                font-size: 28px;
+            }
+
+            .profile-meta {
+                font-size: 16px;
+            }
+
+            .profile-body {
+                padding: 24px 16px;
+            }
+
+            .dogs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#second">About</a></li>
+            <li><a href="#third">How It Works</a></li>
+            <li class="active"><a href="profile.html">Profile</a></li>
+            <li><a href="browse.html">Browse Dogs</a></li>
+        </ul>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- ✅ Hero: Clean, centered, dignified -->
+            <div class="profile-hero">
+                <div class="profile-avatar-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" 
+                         alt="John Doe" class="profile-avatar">
+                </div>
+                <h1 class="profile-name">John Doe</h1>
+                <p class="profile-meta">
+                    <span>Member since Jan 2023</span>
+                    <span>New York, NY</span>
+                    <span>2 Adopted Dogs</span>
+                </p>
+            </div>
+
+            <!-- ✅ Main Content -->
+            <div class="profile-body">
+                <div class="main-content">
+                    <!-- Personal Info -->
+<section class="section">
+    <h2 class="section-title">Personal Information</h2>
+    <div class="info-grid">
+        <div class="info-label">Full Name</div>
+        <div class="info-value">John Doe</div>
+
+        <div class="info-label">Email</div>
+        <div class="info-value">john.doe@example.com</div>
+
+        <div class="info-label">Phone</div>
+        <div class="info-value">(555) 123-4567</div>
+
+        <div class="info-label">Address</div>
+        <div class="info-value">123 Main St, New York, NY 10001</div>
+    </div>
+</section>
+
+<!-- ✅ SELECTED DOGS (New Section) -->
+<section class="section">
+    <h2 class="section-title">🐶 Selected Dogs</h2>
+    <p style="margin-bottom: 16px; color: var(--gray-500);">
+        Dogs you've saved from the <a href="browse.html" style="color: var(--primary); text-decoration: underline;">Browse</a> page.
+        You can review, unsave, or apply to adopt.
+    </p>
+    <div class="dogs-grid">
+        <!-- Example: 3 selected dogs -->
+        <div class="dog-card">
+            <img src="https://images.unsplash.com/photo-1587300003114-3c545a6121a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=512&q=80" 
+                 alt="Luna" class="dog-image">
+            <div class="dog-content">
+                <h3 class="dog-name">Luna</h3>
+                <p class="dog-adopted">♀ • 3 yrs • Medium</p>
+                <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button class="btn btn--outline" style="padding: 6px 10px; font-size: 13px;">View</button>
+                    <button class="btn btn--outline" style="padding: 6px 10px; font-size: 13px; color: #e74c3c;">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dog-card">
+            <img src="https://images.unsplash.com/photo-1537155672550-65e52a225a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=512&q=80" 
+                 alt="Rocky" class="dog-image">
+            <div class="dog-content">
+                <h3 class="dog-name">Rocky</h3>
+                <p class="dog-adopted">♂ • 5 yrs • Large</p>
+                <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button class="btn btn--outline" style="padding: 6px 10px; font-size: 13px;">View</button>
+                    <button class="btn btn--outline" style="padding: 6px 10px; font-size: 13px; color: #e74c3c;">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Adopted Dogs -->
+<section class="section">
+    <h2 class="section-title">🏠 My Adopted Dogs</h2>
+    <div class="dogs-grid">
+        <div class="dog-card">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=512&q=80" 
+                 alt="Buddy" class="dog-image">
+            <div class="dog-content">
+                <h3 class="dog-name">Buddy</h3>
+                <p class="dog-adopted">Adopted • March 2023</p>
+            </div>
+        </div>
+        <div class="dog-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=512&q=80" 
+                 alt="Max" class="dog-image">
+            <div class="dog-content">
+                <h3 class="dog-name">Max</h3>
+                <p class="dog-adopted">Adopted • June 2023</p>
+            </div>
+        </div>
+    </div>
+</section>
+                </div>
+
+                <!-- ✅ Sidebar -->
+                <aside class="sidebar">
+                    <!-- Stats -->
+                    <div class="stats-card">
+                        <h3 class="stats-title">🐾 Your Impact</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Dogs Viewed</span>
+                            <span class="stat-value">24</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Applications</span>
+                            <span class="stat-value">3</span>
+                        </div>
+                        <div class="stat-item" style="border-bottom: none;">
+                            <span class="stat-label">Adoptions</span>
+                            <span class="stat-value" style="color: #27ae60;">2</span>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="actions-card">
+                        <h3 class="actions-title">⚙️ Account Actions</h3>
+                        <a href="edit-profile.html" class="btn btn--primary">Edit Profile</a>
+                        <a href="#" class="btn btn--outline" style="margin-top: 12px;">Logout</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/White_paw_print.png" alt="Paw" width="40">
+        <h3>FOR MORE INFORMATION, FOLLOW US:</h3>
+        <div class="social-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Twitter">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174852.png" alt="WhatsApp">
+        </div>
+        <p style="margin-top: 24px; font-size: 14px; opacity: 0.7;">© 2025 PAWS • Compassion in Every Connection</p>
+    </footer>
+</body>
+</html>
