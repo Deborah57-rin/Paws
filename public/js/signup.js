@@ -93,4 +93,3 @@ login_form.addEventListener('submit', async(e) => {
     alert(data.message);
     }
 });
-

@@ -96,7 +96,6 @@
       "description": "A unique-looking dog. Specify the breed you want her to resemble.",
       "adopted": false
     },
-    
     {
       "id": 10,
       "name": "Chiko",
@@ -107,6 +106,54 @@
       "gender": "male",
       "image": "https://youngskennel.ca/wp-content/uploads/2022/06/chihuahua2.jpeg",
       "description": "A 5-year-old Chihuahua who loves companionship and warm laps.",
+      "adopted": false
+    },
+    {
+      "id": 11,
+      "name": "Robby",
+      "breed": "German Shepherd",
+      "age": "3 years",
+      "size": "large",
+      "location": "Westlands",
+      "gender": "male",
+      "image": "https://hips.hearstapps.com/hmg-prod/images/best-guard-dogs-1650302456.jpeg?crop=0.754xw:1.00xh;0.0651xw,0&resize=1200:*",
+      "description": "A protective and intelligent German Shepherd with strong loyalty.",
+      "adopted": false
+    },
+    {
+      "id": 12,
+      "name": "Mali",
+      "breed": "Africanis",
+      "age": "2 years",
+      "size": "medium",
+      "location": "Kasarani",
+      "gender": "female",
+      "image": "https://trulyjuly.wordpress.com/wp-content/uploads/2022/05/lola-039.jpg?w=1200&h=900&crop=1",
+      "description": "A sweet Africanis with a cheerful personality and gentle behavior.",
+      "adopted": false
+    },
+    {
+      "id": 13,
+      "name": "Clay",
+      "breed": "Chihuahua",
+      "age": "1 year",
+      "size": "small",
+      "location": "Parklands",
+      "gender": "male",
+      "image": "https://www.barkandwhiskers.com/content/images/2023/11/dramatic-chihuahua.webp",
+      "description": "A dramatic but adorable Chihuahua with a bold personality.",
+      "adopted": false
+    },
+    {
+      "id": 14,
+      "name": "Bora",
+      "breed": "Africanis",
+      "age": "4 years",
+      "size": "medium",
+      "location": "Nairobi CBD",
+      "gender": "female",
+      "image": "https://southafrica-info.com/wp-content/uploads/2018/01/Africanis_featured.jpg",
+      "description": "A confident Africanis who is alert, loyal, and friendly.",
       "adopted": false
     }
   ]

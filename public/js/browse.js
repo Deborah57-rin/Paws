@@ -1,8 +1,8 @@
 // JavaScript for browse dogs page
 
-const API_URL = '../data/dogs.json';
+const API_URL = '/api/browse';
 let allDogs = [];
-let selectedDogs = [];
+let selectedDogs = []; // This will now store MongoDB _ids
 let filteredDogs = [];
 
 // Initialize page
@@ -14,16 +14,27 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load all dogs from API
 async function loadDogs() {
     try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        allDogs = data.dogs;
-        filteredDogs = [...allDogs];
+        const endpoint = `${API_URL}/all`;
+        const res = await fetch(endpoint);
+        const data = await res.json();
         
-        // Display all dogs initially
-        displayDogs(filteredDogs);
+        if (data.success) {
+            allDogs = data.dogs;
+            filteredDogs = [...allDogs];
+            
+            // Display all dogs initially
+            displayDogs(filteredDogs);
+        } else {
+            throw new Error(data.message);
+        }
     } catch (error) {
         console.error('Error loading dogs:', error);
-        document.getElementById('dogs-container').innerHTML = '<p class="text-center">Unable to load dogs. Please try again later.</p>';
+        document.getElementById('dogs-container').innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <p class="text-red-600">Unable to load dogs. Please try again later.</p>
+                <p class="text-sm text-gray-500 mt-2">Error: ${error.message}</p>
+            </div>
+        `;
     }
 }
 
@@ -35,35 +46,35 @@ function setupEventListeners() {
 }
 
 // Apply filters to dogs
-function applyFilters() {
+async function applyFilters() {
     const sizeFilter = document.getElementById('size-filter').value;
     const ageFilter = document.getElementById('age-filter').value;
     const locationFilter = document.getElementById('location-filter').value;
     const genderFilter = document.getElementById('gender-filter').value;
     
-    filteredDogs = allDogs.filter(dog => {
-        // Size filter
-        if (sizeFilter !== 'all' && dog.size !== sizeFilter) return false;
+    try {
+        // Build query parameters
+        const params = new URLSearchParams();
         
-        // Age filter
-        if (ageFilter !== 'all') {
-            const age = dog.age.toLowerCase();
-            if (ageFilter === 'puppy' && !age.includes('puppy') && !age.includes('year') && parseInt(age) > 1) return false;
-            if (ageFilter === 'young' && !(parseInt(age) >= 1 && parseInt(age) <= 3)) return false;
-            if (ageFilter === 'adult' && !(parseInt(age) >= 3 && parseInt(age) <= 8)) return false;
-            if (ageFilter === 'senior' && !(parseInt(age) > 8)) return false;
+        if (sizeFilter !== 'all') params.append('size', sizeFilter);
+        if (ageFilter !== 'all') params.append('age', ageFilter);
+        if (locationFilter !== 'all') params.append('location', locationFilter);
+        if (genderFilter !== 'all') params.append('gender', genderFilter);
+        
+        const endpoint = `${API_URL}/filter?${params.toString()}`;
+        const res = await fetch(endpoint);
+        const data = await res.json();
+        
+        if (data.success) {
+            filteredDogs = data.dogs;
+            displayDogs(filteredDogs);
+        } else {
+            throw new Error(data.message);
         }
-        
-        // Location filter
-        if (locationFilter !== 'all' && dog.location !== locationFilter) return false;
-        
-        // Gender filter
-        if (genderFilter !== 'all' && dog.gender !== genderFilter) return false;
-        
-        return true;
-    });
-    
-    displayDogs(filteredDogs);
+    } catch (error) {
+        console.error('Error applying filters:', error);
+        alert('Error applying filters. Please try again.');
+    }
 }
 
 // Clear all filters
@@ -97,11 +108,11 @@ function displayDogs(dogs) {
     }
     
     container.innerHTML = dogs.map(dog => `
-        <div class="dog-card ${selectedDogs.includes(dog.id) ? 'selected color-step-1' : ''}">
-            <div class="card-image-container">
+        <div class="dog-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow ${selectedDogs.includes(dog._id) ? 'ring-2 ring-blue-500' : ''}">
+            <div class="card-image-container relative">
                 <img src="${dog.image}" alt="${dog.name}" class="w-full h-48 object-cover">
                 <div class="absolute top-3 right-3">
-                    <span class="status-badge ${dog.adopted ? 'status-adopted' : 'status-available'}">
+                    <span class="status-badge ${dog.adopted ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'} px-2 py-1 rounded-full text-xs font-medium">
                         ${dog.adopted ? 'Adopted' : 'Available'}
                     </span>
                 </div>
@@ -135,8 +146,8 @@ function displayDogs(dogs) {
                     </div>
                 </div>
                 <p class="text-sm text-gray-600 mb-4 line-clamp-2">${dog.description}</p>
-                <button class="w-full select-dog-btn ${selectedDogs.includes(dog.id) ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'} text-white px-4 py-3 rounded-lg transition-colors font-medium flex items-center justify-center" data-id="${dog.id}">
-                    ${selectedDogs.includes(dog.id) ? 
+                <button class="w-full select-dog-btn ${selectedDogs.includes(dog._id) ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'} text-white px-4 py-3 rounded-lg transition-colors font-medium flex items-center justify-center" data-id="${dog._id}">
+                    ${selectedDogs.includes(dog._id) ? 
                         '<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Selected' : 
                         'Select Dog'}
                 </button>
@@ -147,7 +158,7 @@ function displayDogs(dogs) {
     // Add event listeners to select buttons
     document.querySelectorAll('.select-dog-btn').forEach(button => {
         button.addEventListener('click', function() {
-            const dogId = parseInt(this.getAttribute('data-id'));
+            const dogId = this.getAttribute('data-id');
             toggleDogSelection(dogId);
         });
     });
@@ -158,7 +169,7 @@ function getGenderColor(gender) {
     return gender === 'male' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800';
 }
 
-// Toggle selection of a dog
+// Toggle selection of a dog - NOW USING MONGODB _id
 function toggleDogSelection(dogId) {
     const index = selectedDogs.indexOf(dogId);
     
@@ -166,6 +177,7 @@ function toggleDogSelection(dogId) {
         // Add to selection if less than 3
         if (selectedDogs.length < 3) {
             selectedDogs.push(dogId);
+            saveSelectedDogsToProfile();
         } else {
             alert('You can only select up to 3 dogs at a time.');
             return;
@@ -173,11 +185,40 @@ function toggleDogSelection(dogId) {
     } else {
         // Remove from selection
         selectedDogs.splice(index, 1);
+        saveSelectedDogsToProfile();
     }
     
     // Update display
     displayDogs(filteredDogs);
     updateSelectedCounter();
+}
+
+// Save selected dogs to user profile - SIMPLIFIED
+async function saveSelectedDogsToProfile() {
+    const token = localStorage.getItem('token');
+    if (!token) return; // Only save if user is logged in
+    
+    try {
+        const response = await fetch(`${API_URL}/user/save-selected-dogs`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                dogIds: selectedDogs // This now contains MongoDB _ids
+            })
+        });
+        
+        const data = await response.json();
+        if (!data.success) {
+            console.error('Error saving selected dogs:', data.message);
+        } else {
+            console.log('✅ Selected dogs saved to profile');
+        }
+    } catch (error) {
+        console.error('Error saving selected dogs:', error);
+    }
 }
 
 // Update the selected dogs counter and button
@@ -202,6 +243,13 @@ function proceedToMeeting() {
     }
     
     // Store selected dogs in sessionStorage for the next page
+    // Now storing MongoDB _ids instead of numeric IDs
     sessionStorage.setItem('selectedDogs', JSON.stringify(selectedDogs));
+    
+    // Also store the first dog for paperwork
+    if (selectedDogs.length > 0) {
+        sessionStorage.setItem('adoptionDogId', selectedDogs[0]);
+    }
+    
     window.location.href = 'meeting.html';
 }

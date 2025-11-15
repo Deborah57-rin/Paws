@@ -1,36 +1,111 @@
 // JavaScript for meeting scheduling page
 
-const API_URL = 'data/dogs.json';
-let selectedDogs = [];
+const API_URL = '/api';
+let selectedDogs = []; // This now contains MongoDB _ids
 let allDogs = [];
+let currentUser = null;
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
+    checkAuth();
     loadSelectedDogs();
     setupFormListener();
 });
 
-// Load selected dogs from session storage
+// Check if user is authenticated
+async function checkAuth() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Please login to schedule a meeting');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/user/profile`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Not authenticated');
+        }
+        
+        const data = await response.json();
+        currentUser = data.user;
+        
+        // Pre-fill form with user data
+        if (currentUser) {
+            document.getElementById('name').value = currentUser.name || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('phone').value = currentUser.phone || '';
+        }
+    } catch (error) {
+        console.error('Auth error:', error);
+        localStorage.removeItem('token');
+        window.location.href = 'login.html';
+    }
+}
+
+// Load selected dogs from user's saved progress
 async function loadSelectedDogs() {
     try {
-        // Get selected dog IDs from session storage
+        const token = localStorage.getItem('token');
+        
+        // First try to get from user profile
+        const response = await fetch(`${API_URL}/user/adoption-progress`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            
+            if (data.progress.selectedDogs && data.progress.selectedDogs.length > 0) {
+                selectedDogs = data.progress.selectedDogs.map(dog => dog._id);
+                allDogs = data.progress.selectedDogs;
+                displaySelectedDogs();
+                return;
+            }
+        }
+        
+        // Fallback to session storage
         const storedSelection = sessionStorage.getItem('selectedDogs');
-        if (!storedSelection) {
+        if (storedSelection) {
+            selectedDogs = JSON.parse(storedSelection);
+            await loadDogsData();
+        } else {
             alert('No dogs selected. Please go back and select dogs first.');
             return;
         }
-        
-        selectedDogs = JSON.parse(storedSelection);
-        
-        // Load all dogs data
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        allDogs = data.dogs;
-        
-        // Display selected dogs
-        displaySelectedDogs();
     } catch (error) {
         console.error('Error loading selected dogs:', error);
+        // Fallback to session storage
+        const storedSelection = sessionStorage.getItem('selectedDogs');
+        if (storedSelection) {
+            selectedDogs = JSON.parse(storedSelection);
+            await loadDogsData();
+        } else {
+            alert('No dogs selected. Please go back and select dogs first.');
+        }
+    }
+}
+
+// Load dogs data from API using MongoDB _ids
+async function loadDogsData() {
+    try {
+        // Get all dogs and filter by selected IDs
+        const response = await fetch(`${API_URL}/browse/all`);
+        const data = await response.json();
+        
+        if (data.success) {
+            allDogs = data.dogs.filter(dog => selectedDogs.includes(dog._id));
+            displaySelectedDogs();
+        }
+    } catch (error) {
+        console.error('Error loading dogs data:', error);
     }
 }
 
@@ -38,18 +113,20 @@ async function loadSelectedDogs() {
 function displaySelectedDogs() {
     const container = document.getElementById('selected-dogs-list');
     
-    const selectedDogData = allDogs.filter(dog => selectedDogs.includes(dog.id));
-    
-    if (selectedDogData.length === 0) {
+    if (allDogs.length === 0) {
         container.innerHTML = '<p class="text-gray-500 text-center py-4">No dogs selected</p>';
         return;
     }
     
-    container.innerHTML = selectedDogData.map(dog => `
+    container.innerHTML = allDogs.map(dog => `
         <div class="dog-card border-2 border-green-300 bg-white rounded-xl overflow-hidden">
             <div class="relative">
-                <img src="${dog.image}" alt="${dog.name}" class="w-full md:w-50 h-48 object-cover r">
-                
+                <img src="${dog.image}" alt="${dog.name}" class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2">
+                    <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        ${dog.adopted ? 'Adopted' : 'Available'}
+                    </span>
+                </div>
             </div>
             <div class="p-4">
                 <h3 class="font-bold text-lg text-gray-900 mb-1">${dog.name}</h3>
@@ -74,7 +151,14 @@ function setupFormListener() {
 }
 
 // Schedule meeting and proceed to paperwork
-function scheduleMeeting() {
+async function scheduleMeeting() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Please login to schedule a meeting');
+        window.location.href = 'login.html';
+        return;
+    }
+
     // Get form data
     const formData = {
         name: document.getElementById('name').value,
@@ -83,8 +167,7 @@ function scheduleMeeting() {
         date: document.getElementById('date').value,
         time: document.getElementById('time').value,
         location: document.getElementById('location').value,
-        notes: document.getElementById('notes').value,
-        selectedDogs: selectedDogs
+        notes: document.getElementById('notes').value
     };
     
     // Validate date is in the future
@@ -97,15 +180,35 @@ function scheduleMeeting() {
         return;
     }
     
-    // Store meeting details in sessionStorage
-    sessionStorage.setItem('meetingDetails', JSON.stringify(formData));
-    
-    // For this demo, we'll just proceed with the first selected dog
-    if (selectedDogs.length > 0) {
-        sessionStorage.setItem('adoptionDogId', selectedDogs[0]);
+    try {
+        // Save meeting to database
+        const response = await fetch(`${API_URL}/meeting/schedule`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                dogIds: selectedDogs, // This contains MongoDB _ids
+                meetingDetails: formData
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Store first dog ID for paperwork
+            if (selectedDogs.length > 0) {
+                sessionStorage.setItem('adoptionDogId', selectedDogs[0]);
+            }
+            
+            alert('Meeting scheduled successfully! You will receive a confirmation email shortly.');
+            window.location.href = 'paperwork.html';
+        } else {
+            throw new Error(data.message);
+        }
+    } catch (error) {
+        console.error('Error scheduling meeting:', error);
+        alert('Error scheduling meeting. Please try again.');
     }
-    
-    // Show success message and redirect
-    alert('Meeting scheduled successfully! You will receive a confirmation email shortly.');
-    window.location.href = 'paperwork.html';
 }
